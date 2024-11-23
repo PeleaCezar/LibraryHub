@@ -1,10 +1,12 @@
-﻿namespace LibraryHub.Models;
+﻿using LibraryHub.Repositories;
+
+namespace LibraryHub.Models;
 
 /// <summary>
 /// It's not the responsability of the Book class to know details about  creation of the Publisher entity
 /// So, I put it in the new Publisher entity
 /// </summary>
-public class Book
+public class Book : IAggregateRoot
 {
     public string _title = string.Empty;
 

@@ -11,16 +11,28 @@ public class Release
 
     public IEdition Edition { get; private set; }
 
-    public PublicationDate PublicationDate { get; private set; }
+    public PublicationInfo Publication{ get; private set; }
 
     public CultureInfo Culture { get; private set; }
 
-    public Release(Publisher publisher, IEdition edition, PublicationDate publicationDate, CultureInfo culture) =>
-    (Publisher, Edition, PublicationDate, Culture) = (publisher, edition, publicationDate, culture);
+    public Release(Publisher publisher, IEdition edition, PublicationInfo publication, CultureInfo culture) =>
+    (Publisher, Edition, Publication, Culture) = (publisher, edition, publication, culture);
 
-    public void AdvanceToNext(PublicationDate publicationDate)
+    public void AdvanceToNext(PublicationInfo publication)
     {
-        PublicationDate = publicationDate;
+        Publication = publication;
         Edition = Edition.AdvanceToNext();
     }
+
+    public void SetStatus(PublicationInfo publication)
+    {
+        if (Publication is Published) return;
+        Publication = publication;
+    }
 }
+
+// New Requirement
+// Some books may have not been published yet
+// The date you see in the PublicationDate is only the planned date when the book will appear
+// also, the planned publication date might be missing
+// some unpublished books will have the planned date, while some others will only attain later
